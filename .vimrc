@@ -13,27 +13,29 @@ filetype plugin indent on
 " Syntax highlighting.
 syntax on
 " Setting colorscheme
-"color evening
-"colorscheme
+" color evening
+" colorscheme
 " Config for vim72
 if v:version >= 702
-set   autoindent
-set   autoread
-set   autowrite
-set   background=dark
-set   backspace=indent,eol,start
-set   nobackup
-set   cindent
-set   cinoptions=:0
+set   autoindent "自动缩进
+set   autoread   "文件自动加载
+set   autowrite  "缓冲区自动保存
+set   background=dark "告诉vim背景颜色 不会更改背景颜色
+set   backspace=indent,eol,start "insert模式下  退格删除
+set   nobackup   "取消文件备份
+"set   cindent    "c语言风格缩进
+"set   cinoptions=:0
+set   smartindent "智能缩进
 set   completeopt=longest,menuone
-set   cursorline   "配置vim下划线
+set   cursorline "配置vim下划线
 set   encoding=utf-8
 set   tabstop=4
 set   noexpandtab
+"set   expandtab "使用空格缩进
 set   fileencodings=utf-8,gb2312,gbk,gb18030,chinese
 set   fileformat=unix
-set   foldenable
-set   foldmethod=marker
+set   foldenable "折叠功能
+set   foldmethod=marker "使用标志{}折叠 zf%创建折叠  za 打开/关闭折叠
 set   helpheight=10
 set   helplang=cn
 set   hidden
@@ -42,18 +44,16 @@ set   hlsearch
 set   ignorecase
 set   incsearch
 set   laststatus=2
-"You can copy context if use v
 set   mouse=v
 set   number
 set   pumheight=10
 set   ruler
 set   scrolloff=5
-set   shiftwidth=4
+set   shiftwidth=4 "自动缩进长度
 set   showcmd
-set   smartindent
-set   smartcase
+set   smartcase    "大小写敏感查找
 set   termencoding=utf-8
-set   textwidth=280
+set   textwidth=280 "文本宽度
 set   whichwrap=h,l
 set   wildignore=*.bak,*.o,*.e,*~
 set   wildmenu
@@ -64,7 +64,7 @@ endif
 " Config for vim73
 set tag=tags;
 if v:version >= 703
-set   colorcolumn=+1
+set   colorcolumn=+1 "换行提示线
 endif
 " Config for win32 gvim.
 if has("win32")
@@ -81,7 +81,7 @@ endif
 
 " AUTO COMMANDS:
 " auto expand tab to blanks
-"autocmd FileType c,cpp set expandtab
+" autocmd FileType c,cpp set expandtab
 " Restore the last quit position when open file.
 autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -90,19 +90,21 @@ autocmd BufReadPost *
 
 " SHORTCUT SETTINGS:
 " Set mapleader
-let mapleader=";"
+let mapleader=";" "设置快捷键触发<leader>为';'
 " Space to command mode.
 nnoremap <space> :
 vnoremap <space> :
-" Switching between buffers.
-nnoremap <C-h> <C-W>h
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
-inoremap <C-h> <Esc><C-W>h
-inoremap <C-j> <Esc><C-W>j
-inoremap <C-k> <Esc><C-W>k
+
+"窗口间移动光标
+nnoremap <C-left> <C-W>h
+nnoremap <C-down> <C-W>j
+nnoremap <C-up> <C-W>k
+nnoremap <C-right> <C-W>l
+inoremap <C-left> <Esc><C-W>h
+inoremap <C-down> <Esc><C-W>j
+inoremap <C-right> <Esc><C-W>k
 inoremap <C-l> <Esc><C-W>l
+
 " "cd" to change to open directory.
 let OpenDir=system("pwd")
 nmap <silent> <leader>cdr :exe 'cd ' . OpenDir<cr>:pwd<cr>
@@ -114,13 +116,13 @@ let g:Tlist_Auto_Update=1
 let g:Tlist_Process_File_Always=1
 let g:Tlist_Exit_OnlyWindow=1
 let g:Tlist_Show_One_File=1
-let g:Tlist_WinWidth=27
+let g:Tlist_WinWidth=27 "索引栏宽度
 let g:Tlist_Enable_Fold_Column=0
 let g:Tlist_Auto_Highlight_Tag=1
 let g:Tlist_Auto_Open=1
 " NERDTree.vim
 let g:NERDTreeWinPos="right"
-let g:NERDTreeWinSize=27
+let g:NERDTreeWinSize=27 "目录栏宽度
 let g:NERDTreeShowLineNumbers=1
 let g:NERDTreeQuitOnOpen=1
 " cscope.vim
@@ -150,18 +152,19 @@ let g:LookupFile_PreserveLastPattern=0
 let g:LookupFile_PreservePatternHistory=1
 let g:LookupFile_AlwaysAcceptFirst=1
 let g:LookupFile_AllowNewFiles=0
-" Man.vim
-source $VIMRUNTIME/ftplugin/man.vim
+
 " snipMate
 let g:snips_author="Wang Weiye"
 let g:snips_email="wwytxjy@163.com"
 let g:snips_copyright="SicMicro, Inc"
+
 " plugin shortcuts
 function! RunShell(Msg, Shell)
 	echo a:Msg . '...'
 	call system(a:Shell)
 	echon 'done'
 endfunction
+
 nmap  <F2> :TlistToggle<cr>
 nmap  <F3> :set nu<cr>
 nmap  <F4> :set nonu<cr>
@@ -172,10 +175,9 @@ nmap  <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+ia
 nmap <F10> :call HLUDSync()<cr>
 nmap <F11> :call RunShell("Generate filename tags", "~/.vim/shell/genfiletags.sh")<cr>
 nmap <F12> :call RunShell("Generate cscope", "cscope -Rb")<cr>:cs add cscope.out<cr>
+
 nmap <leader>sa :cs add cscope.out<cr>
-"shei diaoyong
 nmap <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
-"shei dingyi
 nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
 nmap <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
 nmap <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
@@ -187,7 +189,6 @@ nmap <leader>zz <C-w>o
 nmap <leader>gs :GetScripts<cr>
 
 
-
 let g:winManagerWindowLayout='FileExplorer|BufExplorer'
 let g:persistentBehaviour=0
 let g:winManagerWidth=20
@@ -195,8 +196,6 @@ let g:defaultExplorer=1
 nmap <silent> <leader>fir :FirstExplorerWindow<cr>
 nmap <silent> <leader>bot :BottomExplorerWindow<cr>
 nmap <silent> <leader>wm :WMToggle<cr>
-"use Ctrl+c to copy context
-"vmap <C-c> "+y
 
 "modify ctags' shortcuts
 noremap ]  <C-]>
@@ -213,11 +212,7 @@ function! LoadCscope()
 	endif
 endfunction
 au BufEnter /* call LoadCscope()
-"vcscommand 各种版本控制 svn cvs git hg{{{
-"
-"modify vcsccommand.vim line[415] replace line[416] for resovling mapping conflict with c.vim
-"415:   "let lhs = VCSCommandGetOption('VCSCommandMapPrefix', '<Leader>c') . a:shortcut
-"416:    let lhs = VCSCommandGetOption('VCSCommandMapPrefix', ']c') . a:shortcut
+
 "noremap <Leader>ga    :VCSAdd<CR>
 "noremap <Leader>gn    :VCSAnnotate<CR>
 "noremap <Leader>gN    :VCSAnnotate!<CR>
@@ -233,29 +228,12 @@ noremap <Leader>gl    :VCSLog<CR>
 "noremap <Leader>gs    :VCSStatus<CR>
 "noremap <Leader>gu    :VCSUpdate<CR>
 "noremap <Leader>gU    :VCSUnlock<CR>
-" ---------------> Good
+
 noremap <Leader>git    :VCSVimDiff<CR><C-H>
 noremap <Leader>gv    :VCSVimDiff
 noremap <Leader>gb    :VCSBlame<CR><C-H>
 "noremap <Leader>gr    :VCSRevert<CR>
+
 let VCSCommandEnableBufferSetup=0            "slow if set 1
-"}}}
-"git mergetool{{{
-"map <silent> <leader>2 :diffget 2<CR> :diffupdate<CR>
-"map <silent> <leader>3 :diffget 3<CR> :diffupdate<CR>
-"map <silent> <leader>4 :diffget 4<CR> :diffupdate<CR>
-"}}}
-:ab xxx printk("renhongwei330 %s-%d\n", __func__, __LINE__);
-"set tag=/home/renhw/source/Daybreaker2_01-17/apps_proc/linux/tags
-"set tag=/home/renhw/source/8053-1101/apps_proc/kernel/tags
-"Add function for remove whitespace 2016-04-15
-"function RemoveTrailingWhitespace()
-"	if &ft != "diff"
-"		let b:curcol = col(".")
-"		let b:curline = line(".")
-"		silent! %s/\s\+$//
-"		silent! %s/\(\s*\n\)\+\%$//
-"		call cursor(b:curline, b:curcol)
-"	endif
-"endfunction
-"autocmd BufWritePre * call RemoveTrailingWhitespace()
+
+" %s/\r//g  去掉vim中的 ^M
