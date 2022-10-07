@@ -117,11 +117,21 @@ let g:Tlist_WinWidth=27 "索引栏宽度
 let g:Tlist_Enable_Fold_Column=0
 let g:Tlist_Auto_Highlight_Tag=1
 let g:Tlist_Auto_Open=1
+
 " NERDTree.vim
 let g:NERDTreeWinPos="right"
 let g:NERDTreeWinSize=27 "目录栏宽度
 let g:NERDTreeShowLineNumbers=1
-let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeQuitOnOpen=0 "文件打开后自动关闭
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+" Close the tab if NERDTree or (NERDTree + taglist) is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+autocmd BufEnter * if winnr('$') == 2 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | quit | endif
+
 " cscope.vim
 if has("cscope")
     set csto=1
