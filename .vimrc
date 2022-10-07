@@ -14,15 +14,14 @@ filetype plugin indent on
 syntax on
 
 "插件安装 添加Plug 并执行vim命令PlugInstall    server: https://vimawesome.com/
-"注释掉安装完成的插件
 call plug#begin('~/.vim/plugged')
-"Plug 'scrooloose/nerdtree'
-"Plug 'vim-scripts/taglist.vim'
-"Plug 'vim-scripts/c.vim'
-"Plug 'rust-lang/rust.vim'
-"Plug 'vim-scripts/vcscommand.vim'
-"Plug 'skywind3000/vim-auto-popmenu'
-"Plug 'skywind3000/vim-dict'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/c.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'vim-scripts/vcscommand.vim'
+Plug 'skywind3000/vim-auto-popmenu'
+Plug 'skywind3000/vim-dict'
 call plug#end()
 
 " Setting colorscheme
