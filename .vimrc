@@ -72,13 +72,6 @@ set   wildmenu
 set   wildmode=list:longest,full
 set   wrap  "自动换行
 set   vb t_vb= "去掉提示音
-
-"let   g:apc_enable_ft = {'text':1, 'markdown':1, 'php':1} "设定vim内建补全需要生效的文件类型
-let   b:apc_enable = 1 "对全部文件生效
-let   g:apc_cr_confirm = 1  "回车选定
-set   cpt=.,k,w,b "设定从字典文件以及当前打开的文件里收集补全单词，详情看 ':help cpt'
-set   completeopt=menu,menuone,noselect "不要自动选中第一个选项
-set   shortmess+=c "禁止在下方显示一些啰嗦的提示
 endif
 
 " AUTO COMMANDS:
@@ -107,6 +100,9 @@ inoremap <C-down> <Esc><C-W>j
 inoremap <C-right> <Esc><C-W>k
 inoremap <C-l> <Esc><C-W>l
 
+"大括号匹配跳转
+noremap  [   %
+
 " PLUGIN SETTINGS:
 " taglist.vim
 let g:Tlist_Auto_Update=1
@@ -131,6 +127,18 @@ autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 " Close the tab if NERDTree or (NERDTree + taglist) is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 autocmd BufEnter * if winnr('$') == 2 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | quit | endif
+
+" auto-pairs.vim
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"'} "设置要自动配对的符号
+let g:AutoPairs['<']='>' "添加要自动配对的符号<>
+
+" acp.vim
+"let   g:apc_enable_ft = {'text':1, 'markdown':1, 'php':1} "设定vim内建补全需要生效的文件类型
+let   b:apc_enable = 1 "对全部文件生效
+let   g:apc_cr_confirm = 1  "回车选定
+set   cpt=.,k,w,b "设定从字典文件以及当前打开的文件里收集补全单词，详情看 ':help cpt'
+set   completeopt=menu,menuone,noselect "不要自动选中第一个选项
+set   shortmess+=c "禁止在下方显示一些啰嗦的提示
 
 " cscope.vim
 if has("cscope")
