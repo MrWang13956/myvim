@@ -22,6 +22,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'vim-scripts/vcscommand.vim'
 Plug 'skywind3000/vim-auto-popmenu'
 Plug 'skywind3000/vim-dict'
+Plug 'majutsushi/tagbar'
 call plug#end()
 
 " Setting colorscheme
@@ -105,14 +106,20 @@ noremap  [   %
 
 " PLUGIN SETTINGS:
 " taglist.vim
-let g:Tlist_Auto_Update=1
-let g:Tlist_Process_File_Always=1
-let g:Tlist_Exit_OnlyWindow=1
-let g:Tlist_Show_One_File=1
-let g:Tlist_WinWidth=27 "索引栏宽度
-let g:Tlist_Enable_Fold_Column=0
-let g:Tlist_Auto_Highlight_Tag=1
-let g:Tlist_Auto_Open=1
+"let g:Tlist_Auto_Update=1
+"let g:Tlist_Process_File_Always=1
+"let g:Tlist_Exit_OnlyWindow=1
+"let g:Tlist_Show_One_File=1
+"let g:Tlist_WinWidth=27 "索引栏宽度
+"let g:Tlist_Enable_Fold_Column=0
+"let g:Tlist_Auto_Highlight_Tag=1
+"let g:Tlist_Auto_Open=1
+
+" tagbar
+let g:tagbar_left=1
+let g:tagbar_width=27
+let g:tagbar_ctags_bin='/usr/bin/ctags'
+autocmd BufReadPost *.cpp,*.c,*.cc,*.cxx,*.rs,*.vim*,*.py call tagbar#autoopen()
 
 " NERDTree.vim
 let g:NERDTreeWinPos="right"
